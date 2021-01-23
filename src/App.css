@@ -1,38 +1,85 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  width: 100%;
   min-height: 100vh;
+  background: var(--preto);
+}
+
+.container-img {
+  background: var(--preto);
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  position: relative;
+}
+.container {
+  width: 100%;
+  min-height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+/* ----- */
+.button-start {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.button-start span {
+  color: #fff;
+  font-family: var(--pixelFont), cursive;
+  font-size: 12px;
+}
+.button-start img {
+  max-width: 120px;
+  z-index: 100;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* ----------------- */
+/* ----------------- */
+.container-img img {
+  max-width: 300px;
+  width: 100%;
+}
+
+.container-img .loading-indicator {
+  max-width: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.container-img .loading-indicator span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: var(--branco);
+  animation: loading 3s infinite cubic-bezier(0.19, 1, 0.22, 1);
+  transform-origin: center center;
+  opacity: 0;
+}
+
+.container-img .loading-indicator span:nth-child(1) {
+  animation-delay: 0.5s;
+}
+.container-img .loading-indicator span:nth-child(2) {
+  animation-delay: 0.75s;
+}
+.container-img .loading-indicator span:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes loading {
+  0%,
+  100% {
+    transform: translateY(0px);
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
   }
 }

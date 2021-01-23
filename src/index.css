@@ -1,13 +1,93 @@
-body {
+:root {
+  --roxo: #0f0815;
+  --vermelho: #b14156;
+  --laranja: #de7651;
+  --branco: #fff;
+  --preto: #000;
+
+  --normalFont: "Reenie Beanie";
+  --pixelFont: "Press Start 2P";
+}
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 768px) {
+  .cursor {
+    pointer-events: none;
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--branco);
+
+    border-radius: 50%;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%) scale(8);
+    animation: bgcolor 3s linear infinite;
+    z-index: 2000000;
+
+    transition: background 0.2s linear, border 0.2s linear;
+  }
+
+  .cursor.hide {
+    transition: 0.2s all;
+    width: 32px;
+    height: 32px;
+    mix-blend-mode: none;
+    background-color: var(--roxo);
+  }
+
+  .cursor::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    opacity: 1;
+    transform: scale(0);
+    background: var(--branco);
+    animation: splash 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  }
+}
+
+@keyframes splash {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+::selection {
+  background: var(--vermelho);
+  color: var(--branco);
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
 }
