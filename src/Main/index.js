@@ -1,13 +1,54 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React from "react";
+import React, { useRef, useState } from "react";
 import { FiInstagram, FiPhone } from "react-icons/fi";
 import logoImg from "../assets/logo.png";
 import animeImg from "../assets/cute.gif";
 
+import { motion, useViewportScroll, useTransform } from "framer-motion";
+
+import PortfolioItem from "./PortfolioItem";
+
 import "./styles.css";
 
 function Main() {
+  const ref = useRef(null);
+  const { scrollY, scrollYProgress } = useViewportScroll();
+
+  /* -------------------------------------- */
+  const [DAboutMe, setDAboutMe] = useState(0);
+  const yDAboutMe = useTransform(scrollY, [DAboutMe, DAboutMe + 2], [0, -1], {
+    clamp: false,
+  });
+
+  const opacityDAboutMe = useTransform(
+    scrollY,
+    [DAboutMe, DAboutMe + 800],
+    [1, 0],
+    {
+      clamp: true,
+    }
+  );
+  /* -------------------------------------- */
+  const [DTitleAboutMe, setDTitleAboutMe] = useState(0);
+  const yDTitleAboutMe = useTransform(
+    scrollY,
+    [DTitleAboutMe, DTitleAboutMe + 1],
+    [0, -1],
+    {
+      clamp: false,
+    }
+  );
+
+  const opacityDTitleAboutMe = useTransform(
+    scrollY,
+    [DTitleAboutMe, DTitleAboutMe + 200],
+    [1, 0],
+    {
+      clamp: true,
+    }
+  );
+  /* -------------------------------------- */
   const handleNavigateToTop = (event) => {
     event.preventDefault();
 
@@ -23,24 +64,28 @@ function Main() {
   React.useEffect(() => {
     function hide() {
       const cursor = document.querySelector("div.cursor");
-      cursor.classList.add("hide");
+      if (cursor) {
+        cursor.classList.add("hide");
+      }
     }
     function show() {
       const cursor = document.querySelector("div.cursor");
-      cursor.classList.remove("hide");
+      if (cursor) {
+        cursor.classList.remove("hide");
+      }
     }
 
-    const bgs = document.querySelectorAll("div.bg");
+    const bgs = document.querySelectorAll("div.bg") || [];
     bgs.forEach((bg) => {
       bg.addEventListener("mouseover", hide);
       bg.addEventListener("mouseleave", show);
     });
 
-    const profile = document.querySelector(".person .card img");
+    const profile = document.querySelector(".person .card img") || [];
     profile.addEventListener("mouseover", hide);
     profile.addEventListener("mouseleave", show);
 
-    const actionButton = document.querySelector("a.to-top");
+    const actionButton = document.querySelector("a.to-top") || [];
 
     actionButton.addEventListener("mouseover", hide);
     actionButton.addEventListener("mouseleave", show);
@@ -63,33 +108,66 @@ function Main() {
       <header>
         <img src={logoImg} alt="Clara em Pixel" />
       </header>
-      <h1>Quem sou eu</h1>
-      <section className="about__me">
-        <div className="person">
-          <div className="card">
-            <img
-              src="https://images.unsplash.com/photo-1610642434250-392436bd9fba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80"
-              alt="Clara"
-            />
+
+      <motion.div style={{ y: yDTitleAboutMe, opacity: opacityDTitleAboutMe }}>
+        <h1>Quem sou eu</h1>
+      </motion.div>
+
+      <motion.div
+        style={{ y: yDAboutMe, opacity: opacityDAboutMe }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          transitionEnd: {
+            opacity: 1,
+            y: 0,
+          },
+        }}
+        initial={{ y: 100, opacity: 0 }}
+        transition={{ duration: 0.75 }}
+      >
+        <section ref={ref} className="about__me">
+          <div className="person">
+            <motion.div
+              className="card"
+              animate={{
+                y: 0,
+                opacity: 1,
+                transitionEnd: {
+                  opacity: 1,
+                  y: 0,
+                },
+              }}
+              initial={{ y: -100, opacity: 0 }}
+              transition={{ duration: 0.75, delay: 0.25 }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1610642434250-392436bd9fba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80"
+                alt="Clara"
+              />
+            </motion.div>
           </div>
-        </div>
-        <div className="content_text">
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio
-            deleniti incidunt accusantium quaerat dolores facilis adipisci
-            consectetur eius mollitia totam impedit reiciendis nostrum, culpa
-            illum earum nisi facere veritatis eos.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis,
-            facere.
-          </p>
-        </div>
-      </section>
+
+          <div className="content_text">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio
+              deleniti incidunt accusantium quaerat dolores facilis adipisci
+              consectetur eius mollitia totam impedit reiciendis nostrum, culpa
+              illum earum nisi facere veritatis eos.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Corporis, facere.
+            </p>
+          </div>
+        </section>
+      </motion.div>
+
       <section className="section-bg"></section>
       <section className="portfolio__container">
         <h1>Alguns trabalhos</h1>
-        <div className="item item1">
+
+        <PortfolioItem className="item item1">
           <div className="bg"></div>
           <div className="description">
             <p>
@@ -102,8 +180,8 @@ function Main() {
 
             <a href="#">Ver mais</a>
           </div>
-        </div>
-        <div className="item item2">
+        </PortfolioItem>
+        <PortfolioItem className="item item2">
           <div className="description">
             <p>
               The Avengers, um grupo de superherois da Marvel em formato de
@@ -115,8 +193,8 @@ function Main() {
             <a href="#">Ver mais</a>
           </div>
           <div className="bg"></div>
-        </div>
-        <div className="item item3">
+        </PortfolioItem>
+        <PortfolioItem className="item item3">
           <div className="bg"></div>
           <div className="description">
             <p>
@@ -129,7 +207,7 @@ function Main() {
 
             <a href="#">Ver mais</a>
           </div>
-        </div>
+        </PortfolioItem>
       </section>
       <footer>
         <div className="social">

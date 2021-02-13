@@ -14,7 +14,7 @@
   justify-content: center;
 }
 
-.main-section > h1 {
+.main-section h1 {
   font-family: var(--pixelFont);
   font-size: 32px;
   color: var(--branco);
@@ -125,6 +125,7 @@ a.to-top img {
   width: 100%;
   min-height: 100vh;
   background: var(--roxo);
+  overflow: hidden;
 }
 
 .portfolio__container h1 {
