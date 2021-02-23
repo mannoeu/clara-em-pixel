@@ -11,16 +11,25 @@ import "./App.css";
 function App() {
   const [loading, setLoading] = useState(false);
   const [loadingIndicator, setLoadingIndicator] = useState(true);
+  const [vol, setVol] = useState(0.3);
+
+  function handleToggleVol(e) {
+    setVol(e.target.value);
+  }
 
   const cursorRef = React.useRef(null);
 
   const bgAudioRef = React.useRef(null);
 
   function start() {
-    bgAudioRef.current.volume = 0.3;
+    bgAudioRef.current.volume = vol;
     bgAudioRef.current.play();
     setLoading(true);
   }
+
+  useEffect(() => {
+    bgAudioRef.current.volume = vol;
+  }, [vol]);
 
   useEffect(() => {
     if (loading) {
@@ -56,6 +65,16 @@ function App() {
         autoPlay={true}
         loop={true}
       />
+      <div className="controls-reproduction">
+        <input
+          type="range"
+          value={vol}
+          onChange={handleToggleVol}
+          step="0.1"
+          min="0"
+          max="1"
+        />
+      </div>
       <div ref={cursorRef} className="cursor"></div>
     </div>
   );

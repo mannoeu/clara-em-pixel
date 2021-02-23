@@ -150,25 +150,6 @@ a.to-top img {
   transition: opacity 0.2s linear;
 }
 
-.portfolio__container .item1 .bg {
-  background: url("https://i.etsystatic.com/19783610/r/il/4ef890/2092252779/il_570xN.2092252779_ssak.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-.portfolio__container .item2 .bg {
-  background: url("https://i.pinimg.com/originals/9d/2e/8d/9d2e8d77bf2bc8af087692c8d35fcb32.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-.portfolio__container .item3 .bg {
-  background: url("https://external-preview.redd.it/LWTHAY54t12IJVec34T9Vq2uiAH0Jv2Z_hNjggiwO0c.jpg?auto=webp&s=cbee349c86028fd3f4858c0314b6e192af464d5f");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-
 .portfolio__container .item .bg:hover {
   opacity: 1;
 }
@@ -196,22 +177,10 @@ a.to-top img {
     width: 100%;
     height: max-content;
   }
-  .item.item1 .bg {
+  .item .bg {
     order: 1;
   }
-  .item.item1 .description {
-    order: 2;
-  }
-  .item.item2 .bg {
-    order: 1;
-  }
-  .item.item2 .description {
-    order: 2;
-  }
-  .item.item3 .bg {
-    order: 1;
-  }
-  .item.item3 .description {
+  .item .description {
     order: 2;
   }
 }

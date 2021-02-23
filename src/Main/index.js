@@ -1,9 +1,10 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/anchor-has-content */
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { FiInstagram, FiPhone } from "react-icons/fi";
 import logoImg from "../assets/logo.png";
 import animeImg from "../assets/cute.gif";
+import AboutMe from "../assets/about_me.jfif";
+
+import data from "../mock";
 
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 
@@ -13,6 +14,7 @@ import "./styles.css";
 
 function Main() {
   const ref = useRef(null);
+
   const { scrollY, scrollYProgress } = useViewportScroll();
 
   /* -------------------------------------- */
@@ -141,10 +143,7 @@ function Main() {
               initial={{ y: -100, opacity: 0 }}
               transition={{ duration: 0.75, delay: 0.25 }}
             >
-              <img
-                src="https://images.unsplash.com/photo-1610642434250-392436bd9fba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80"
-                alt="Clara"
-              />
+              <img src={AboutMe} alt="Clara" />
             </motion.div>
           </div>
 
@@ -167,47 +166,61 @@ function Main() {
       <section className="portfolio__container">
         <h1>Alguns trabalhos</h1>
 
-        <PortfolioItem className="item item1">
-          <div className="bg"></div>
-          <div className="description">
-            <p>
-              O Joker é um supervilão fictício que aparece nos livros de banda
-              desenhada norte-americanos publicados pela editora estadunidense
-              DC Comics. O trabalho foi criar um quadro 30cm x 30cm utilizando
-              peças de hamma beads de 2mm em 12 cores. Foram utilizadas um total
-              de 432 peças.
-            </p>
+        {data?.map((item) => {
+          return item.id % 2 === 0 ? (
+            <PortfolioItem
+              key={`portfolio-item-${item.id}`}
+              className={`item item${item.id}`}
+            >
+              <div
+                className="bg"
+                style={{
+                  background: `url(${item.image})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
+              <div className="description">
+                <p>{item.description}</p>
 
-            <a href="#">Ver mais</a>
-          </div>
-        </PortfolioItem>
-        <PortfolioItem className="item item2">
-          <div className="description">
-            <p>
-              The Avengers, um grupo de superherois da Marvel em formato de
-              chaveiro com dimensões 10cm x 10cm, as action figures mais em
-              conta do mercado. O trabalho mostra a Viúva Negra, Homem Aranha,
-              Capitão América, Homem de Ferro, Thor, Loki e Hulk.
-            </p>
+                <a
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href={item.link_redirect}
+                >
+                  Ver mais
+                </a>
+              </div>
+            </PortfolioItem>
+          ) : (
+            <PortfolioItem
+              key={`portfolio-item-${item.id}`}
+              className={`item item${item.id}`}
+            >
+              <div className="description">
+                <p>{item.description}</p>
 
-            <a href="#">Ver mais</a>
-          </div>
-          <div className="bg"></div>
-        </PortfolioItem>
-        <PortfolioItem className="item item3">
-          <div className="bg"></div>
-          <div className="description">
-            <p>
-              Este foi um dos mais divertidos, principalmente porque Minecraft
-              já tem uma pegada pixel art. Mini chaveiros 6cm x 6cm com a cara
-              dos personagens e NPC's do game, além de uma espada 10cm x 30cm.
-              Peça de colecionador, fala tu?! Foram gastos 300 peças com 48
-              cores diferentes.
-            </p>
-
-            <a href="#">Ver mais</a>
-          </div>
-        </PortfolioItem>
+                <a
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href={item.link_redirect}
+                >
+                  Ver mais
+                </a>
+              </div>
+              <div
+                className="bg"
+                style={{
+                  background: `url(${item.image})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
+            </PortfolioItem>
+          );
+        })}
       </section>
       <footer>
         <div className="social">
