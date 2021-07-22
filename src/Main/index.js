@@ -149,15 +149,17 @@ function Main() {
 
           <div className="content_text">
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio
-              deleniti incidunt accusantium quaerat dolores facilis adipisci
-              consectetur eius mollitia totam impedit reiciendis nostrum, culpa
-              illum earum nisi facere veritatis eos.
+              Oi pessoal, me chamo Clara, sou a lunática dos hamma beads e minha
+              história com pixel art se inicia perambulando pelo pinterest onde
+              recebi uma sugestão de peça e logo me encantei, passei a salvar
+              várias e várias peças e consumir bastante conteúdo sobre pixel art
+              e isso durou mais ou menos 2 anos, até que finalmente tomei
+              coragem e comprei alguns materiais para produzir minhas próprias
+              peças e a paixão só cresceu, principalmente pelo fato de que cada
+              cliente me pedia uma peça diferente, única ou inusitada. Quanto
+              maior o desafio, maior a satisfação que tenho de produzir.
             </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Corporis, facere.
-            </p>
+            <p>Quer conhecer um pouco do meu trabalho? Continua rolando! :D</p>
           </div>
         </section>
       </motion.div>
@@ -239,8 +241,18 @@ function Main() {
             <FiPhone />
           </a>
         </div>
-        <p>2020 Clara em pixel</p>
-        <p>Todos os direitos reservados.</p>
+        <p>{new Date().getFullYear()} CLARA EM PIXEL</p>
+        <p className="p-anchor">
+          Todos os direitos reservados. Criado por{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/mannoeu"
+          >
+            manno_eu
+          </a>
+          .
+        </p>
       </footer>
       <a
         href="#main"

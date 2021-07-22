@@ -36,9 +36,11 @@ a.to-top {
   position: fixed;
   bottom: 0px;
   right: 5px;
+  outline: none;
 }
 a.to-top img {
   max-width: 100px;
+  outline: none;
 }
 
 @media (max-width: 400px) {
@@ -231,4 +233,12 @@ a.to-top img {
 }
 .main-section footer .social a svg {
   color: var(--roxo);
+}
+
+.p-anchor > a {
+  text-decoration: none;
+  color: inherit;
+}
+.p-anchor > a:hover {
+  text-decoration: underline;
 }
