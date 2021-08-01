@@ -233,13 +233,13 @@ function Main() {
           >
             <FiInstagram />
           </a>
-          <a
+          {/*           <a
             href={`https://api.whatsapp.com/send?phone=55${phone}&text=${text}`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <FiPhone />
-          </a>
+          </a> */}
         </div>
         <p>{new Date().getFullYear()} CLARA EM PIXEL</p>
         <p className="p-anchor">
